@@ -1,4 +1,4 @@
-package com.targa.labs.myboutique.common.domain;
+package com.targa.labs.myboutique.common.entity;
 
 import java.time.Instant;
 
