@@ -20,7 +20,7 @@ podTemplate(
     
     // Checkout Source Code.
     stage('Checkout Source') {
-      git url: "${REPO}""myboutique-commons.git"
+      git url: '"${REPO}"myboutique-commons.git'
     }
 
     def mvnCmd = "mvn -s nexus_setting.xml clean package -DskipTests=true" 
