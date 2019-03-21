@@ -7,7 +7,7 @@ podTemplate(
   containers: [
     containerTemplate(
       name: "jnlp",
-      image: "docker-registry.default.svc:5000/mics-tools/jenkins-agent-appdev",
+      image: "docker-registry.default.svc:5000/${GUID}-tools/jenkins-agent-appdev",
       resourceRequestMemory: "1Gi",
       resourceLimitMemory: "2Gi"
     )
@@ -20,7 +20,7 @@ podTemplate(
     
     // Checkout Source Code.
     stage('Checkout Source') {
-      git url: "https://github.com/LekWut/myboutique-commons.git"
+      git url: ${REPO}"myboutique-commons.git"
     }
 
     def mvnCmd = "mvn -s nexus_setting.xml clean package -DskipTests=true" 
@@ -48,7 +48,7 @@ podTemplate(
 	  // Publish the built war file to Nexus
       stage('Publish to Nexus') {
         echo "Publish to Nexus"
-        sh "${mvnCmd} deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::http://nexus3.mics-tools.svc.cluster.local:8081/repository/maven-releases/"
+        sh "${mvnCmd} deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::http://nexus3.${GUID}-tools.svc.cluster.local:8081/repository/releases/"
         // TBD: Publish to Nexus
       }
   }
