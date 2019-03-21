@@ -26,7 +26,7 @@ podTemplate(
     def mvnCmd = "mvn -s nexus_setting.xml clean package -DskipTests=true" 
 
     stage('Build war') {
-	  echo "Building version ${devTag}"
+	  echo "Building version"
 	  sh "${mvnCmd} clean package -DskipTests"
 	  // TBD: Execute Maven Build
     }
@@ -34,7 +34,7 @@ podTemplate(
     // Using Maven build the war file
     // Do not run tests in this step
     stage('Build war') {
-      echo "Building version ${devTag}"
+      echo "Building version"
       sh "${mvnCmd} clean package -DskipTests"
       // TBD: Execute Maven Build
     }
